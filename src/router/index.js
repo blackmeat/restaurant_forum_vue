@@ -8,6 +8,7 @@ import Restaurants from "../views/Restaurants.vue"
 Vue.use(VueRouter)
 
 const routes = [
+
   {
     path: "/",
     name: "root",
@@ -57,6 +58,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  linkExactActiveClass: 'active',
   routes
 })
 
