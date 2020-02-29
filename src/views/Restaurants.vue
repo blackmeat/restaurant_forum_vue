@@ -2,7 +2,7 @@
   <div class="container py-5">
     <Navtab />
     <!-- 餐廳類別標籤 RestaurantsNavPills -->
-
+    <RestaurantsNavPills :categories="categories" />
     <div>
       <!-- 餐廳卡片 RestaurantCard-->
       <!-- v-for="restaurant in restaurants"
@@ -17,30 +17,10 @@
 <script>
 import Navtab from "./../components/Navtab";
 import RestaurantCard from "../components/RestaurantCard";
+import RestaurantsNavPills from "../components/RestaurantsNavPills";
 
 const dummyData = {
   restaurants: [
-    {
-      id: 143,
-      name: "testrestaurant",
-      tel: "",
-      address: "",
-      opening_hours: "",
-      description: "",
-      image: null,
-      viewCounts: null,
-      createdAt: "2020-01-19T03:04:21.188Z",
-      updatedAt: "2020-01-19T03:04:21.188Z",
-      CategoryId: 109,
-      Category: {
-        id: 109,
-        name: "美式料理",
-        createdAt: "2019-12-17T11:36:08.937Z",
-        updatedAt: "2019-12-17T11:36:08.937Z"
-      },
-      isFavorited: false,
-      isLiked: false
-    },
     {
       id: 51,
       name: "發大財0121牛排",
@@ -61,27 +41,6 @@ const dummyData = {
       },
       isFavorited: false,
       isLiked: true
-    },
-    {
-      id: 144,
-      name: "麥當當",
-      tel: "123",
-      address: "麥當勞總部",
-      opening_hours: "03:33",
-      description: "",
-      image: null,
-      viewCounts: null,
-      createdAt: "2020-02-16T05:09:24.297Z",
-      updatedAt: "2020-02-16T05:09:24.297Z",
-      CategoryId: 6,
-      Category: {
-        id: 6,
-        name: "美式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: false,
-      isLiked: false
     },
     {
       id: 14,
@@ -220,18 +179,6 @@ const dummyData = {
       name: "複合式料理",
       createdAt: "2019-11-20T06:25:42.917Z",
       updatedAt: "2019-11-20T06:25:42.917Z"
-    },
-    {
-      id: 109,
-      name: "cool",
-      createdAt: "2019-12-17T11:36:08.937Z",
-      updatedAt: "2019-12-17T11:36:08.937Z"
-    },
-    {
-      id: 110,
-      name: "ccc",
-      createdAt: "2020-01-12T16:58:30.105Z",
-      updatedAt: "2020-01-20T12:30:43.772Z"
     }
   ],
   categoryId: "",
@@ -243,7 +190,8 @@ const dummyData = {
 export default {
   components: {
     Navtab,
-    RestaurantCard
+    RestaurantCard,
+    RestaurantsNavPills
   },
   data() {
     return {
