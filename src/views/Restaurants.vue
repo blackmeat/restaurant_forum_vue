@@ -5,9 +5,13 @@
     <RestaurantsNavPills :categories="categories" />
     <div>
       <!-- 餐廳卡片 RestaurantCard-->
-      <!-- v-for="restaurant in restaurants"
-      :key="restaurant.id"-->
-      <RestaurantCard :initialRestaurant="restaurants" />
+      <div class="row">
+        <RestaurantCard
+          v-for="restaurant in restaurants"
+          :key="restaurant.id"
+          :initial-restaurant="restaurant"
+        />
+      </div>
     </div>
 
     <!-- 分頁標籤 RestaurantPagination -->
@@ -188,7 +192,7 @@ const dummyData = {
       updatedAt: "2019-11-20T06:25:42.917Z"
     }
   ],
-  categoryId: "",
+  categoryId: null,
   page: 1,
   totalPage: [1, 2, 3, 4, 5, 6],
   prev: 1,
