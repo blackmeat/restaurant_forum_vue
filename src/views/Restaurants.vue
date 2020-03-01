@@ -11,6 +11,12 @@
     </div>
 
     <!-- 分頁標籤 RestaurantPagination -->
+    <RestaurantsPagination
+      v-if="totalPage > 1"
+      :category-id="categoryId"
+      :current-page="currentPage"
+      :total-page="totalPage"
+    />
   </div>
 </template>
 
@@ -18,6 +24,7 @@
 import Navtab from "./../components/Navtab";
 import RestaurantCard from "../components/RestaurantCard";
 import RestaurantsNavPills from "../components/RestaurantsNavPills";
+import RestaurantsPagination from "../components/RestaurantsPagination";
 
 const dummyData = {
   restaurants: [
@@ -191,7 +198,8 @@ export default {
   components: {
     Navtab,
     RestaurantCard,
-    RestaurantsNavPills
+    RestaurantsNavPills,
+    RestaurantsPagination
   },
   data() {
     return {
