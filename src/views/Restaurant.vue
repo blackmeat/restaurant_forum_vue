@@ -5,13 +5,17 @@
     <RestaurantDetail :initial-restaurant="restaurant" />
     <hr />
     <!-- 餐廳評論 RestaurantComments -->
+    <RestaurantComments
+      :restaurant-comments="restaurantComments"
+      @after-delete-comment="afterDeleteComment"
+    />
     <!-- 新增評論 CreateComment -->
   </div>
 </template>
 
 <script>
 import RestaurantDetail from "../components/RestaurantDetail";
-
+import RestaurantComments from "../components/RestaurantComments";
 const dummyData = {
   // 請貼上資料樣本
   restaurant: {
@@ -61,7 +65,8 @@ const dummyData = {
 
 export default {
   components: {
-    RestaurantDetail
+    RestaurantDetail,
+    RestaurantComments
   },
 
   data() {
@@ -103,6 +108,11 @@ export default {
       };
 
       this.restaurantComments = dummyData.restaurant.Comments;
+    },
+    afterDeleteComment(commentId) {
+      this.restaurantComments = this.restaurantComments.filter(comment => {
+        comment.id !== commentId;
+      });
     }
   }
 };
