@@ -1,14 +1,12 @@
 <template>
   <div>
-    <h2 class="my-4">所有評論：</h2>
-
-    <div v-for="comment in restaurantComments" :key="comment.id">
+    <div>
       <blockquote class="blockquote mb-0">
         <button
           v-if="currentUser.isAdmin"
           type="button"
           class="btn btn-danger float-right"
-          @click.stop.prevent="handleDeleteButtonClick(commentId)"
+          @click.stop.prevent="handleDeleteButtonClick(comment.id)"
         >Delete</button>
         <h3>
           <a href="#">{{comment.User.name}}</a>
@@ -37,13 +35,14 @@ export default {
   mixins: [fromNowFilter],
   props: {
     restaurantComments: {
-      type: Array,
+      type: Object,
       required: true
     }
   },
   data() {
     return {
-      currentUser: dummyUser.currentUser
+      currentUser: dummyUser.currentUser,
+      comment: this.restaurantComments
     };
   },
   methods: {

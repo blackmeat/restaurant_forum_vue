@@ -5,17 +5,22 @@
     <RestaurantDetail :initial-restaurant="restaurant" />
     <hr />
     <!-- 餐廳評論 RestaurantComments -->
+    <h2 class="my-4">所有評論：</h2>
     <RestaurantComments
-      :restaurant-comments="restaurantComments"
+      v-for="comment in restaurantComments"
+      :key="comment.id"
+      :restaurant-comments="comment"
       @after-delete-comment="afterDeleteComment"
     />
     <!-- 新增評論 CreateComment -->
+    <CreateComment :restaurant-id="restaurant.id" @after-create-comment="afterCreateComment" />
   </div>
 </template>
 
 <script>
 import RestaurantDetail from "../components/RestaurantDetail";
 import RestaurantComments from "../components/RestaurantComments";
+import CreateComment from "../components/CreateComment";
 const dummyData = {
   // 請貼上資料樣本
   restaurant: {
@@ -62,11 +67,22 @@ const dummyData = {
   isFavorited: false,
   isLiked: false
 };
+const dummyUser = {
+  currentUser: {
+    id: 1,
+    name: "管理者",
+    email: "root@example.com",
+    image: "https://i.pravatar.cc/300",
+    isAdmin: true
+  },
+  isAuthenticated: true
+};
 
 export default {
   components: {
     RestaurantDetail,
-    RestaurantComments
+    RestaurantComments,
+    CreateComment
   },
 
   data() {
@@ -83,6 +99,7 @@ export default {
         isFavorited: false,
         isLiked: false
       },
+      currentUser: {},
       restaurantComments: []
     };
   },
@@ -106,12 +123,25 @@ export default {
         isFavorited: dummyData.isFavorited,
         isLiked: dummyData.isLiked
       };
-
+      this.currentUser = dummyUser.currentUser;
       this.restaurantComments = dummyData.restaurant.Comments;
     },
     afterDeleteComment(commentId) {
-      this.restaurantComments = this.restaurantComments.filter(comment => {
-        comment.id !== commentId;
+      this.restaurantComments = this.restaurantComments.filter(
+        comment => comment.id !== commentId
+      );
+    },
+    afterCreateComment(payload) {
+      const { commentId, restaurantId, text } = payload;
+      this.restaurantComments.push({
+        id: commentId,
+        RestaurantId: restaurantId,
+        User: {
+          id: this.currentUser.id,
+          name: this.currentUser.name
+        },
+        text,
+        createdAt: new Date()
       });
     }
   }
