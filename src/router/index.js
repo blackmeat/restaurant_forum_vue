@@ -63,6 +63,12 @@ const routes = [
   },
 
   {
+    path: "/users/:id",
+    name: "userProfile",
+    component: () => import("../views/User.vue")
+  },
+
+  {
     path: "*",
     name: "NotFound",
     component: NotFound
